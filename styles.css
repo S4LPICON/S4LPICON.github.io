@@ -1,26 +1,46 @@
 body {
     font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
 }
 
 header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-}
-
-main {
-    padding: 20px;
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
+    background: #007acc;
+    color: white;
     padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+    font-size: 1.5em;
+}
+
+#blocklyDiv {
+    height: 400px;
+    width: 90%;
+    margin: 20px auto;
+    border: 2px solid #ccc;
+}
+
+button {
+    background: #007acc;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #005f99;
+}
+
+pre {
+    background: #222;
+    color: #0f0;
+    padding: 10px;
+    border-radius: 5px;
+    width: 80%;
+    margin: 20px auto;
+    text-align: left;
+    overflow-x: auto;
 }
