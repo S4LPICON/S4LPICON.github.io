@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <category name="Minecraft" colour="120">
                 <block type="mc_send_chat"></block>
                 <block type="mc_spawn_entity"></block>
+                <block type="mc_select_animal_and_vector"></block>
             </category>
         </xml>
     `;
@@ -52,6 +53,7 @@ Blockly.JavaScript["mc_send_chat"] = function (block) {
     return `console.log("Minecraft Chat: " + ${message});\n`;
 };
 
+
 // Bloque para generar una entidad en Minecraft
 Blockly.Blocks["mc_spawn_entity"] = {
     init: function () {
@@ -60,7 +62,8 @@ Blockly.Blocks["mc_spawn_entity"] = {
             .appendField(new Blockly.FieldDropdown([
                 ["Zombie", "ZOMBIE"],
                 ["Vaca", "COW"],
-                ["Creeper", "CREEPER"]
+                ["Creeper", "CREEPER"],
+                ["Pollo", "Chicken"]
             ]), "ENTITY");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -73,4 +76,38 @@ Blockly.Blocks["mc_spawn_entity"] = {
 Blockly.JavaScript["mc_spawn_entity"] = function (block) {
     var entity = block.getFieldValue("ENTITY");
     return `console.log("Spawn entidad: ${entity}");\n`;
+};
+
+// Bloque para seleccionar un animal y un vector de 3 posiciones
+Blockly.Blocks["mc_select_animal_and_vector"] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Seleccionar animal")
+            .appendField(new Blockly.FieldDropdown([
+                ["Gato", "CAT"],
+                ["Perro", "DOG"]
+            ]), "ANIMAL");
+        this.appendValueInput("VECTOR_X")
+            .setCheck("Number")
+            .appendField("Vector X");
+        this.appendValueInput("VECTOR_Y")
+            .setCheck("Number")
+            .appendField("Y");
+        this.appendValueInput("VECTOR_Z")
+            .setCheck("Number")
+            .appendField("Z");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(120);
+        this.setTooltip("Selecciona un animal y un vector de 3 posiciones.");
+    },
+};
+
+// Código JavaScript para el bloque "mc_select_animal_and_vector"
+Blockly.JavaScript["mc_select_animal_and_vector"] = function (block) {
+    var animal = block.getFieldValue("ANIMAL");
+    var vectorX = Blockly.JavaScript.valueToCode(block, "VECTOR_X", Blockly.JavaScript.ORDER_ATOMIC);
+    var vectorY = Blockly.JavaScript.valueToCode(block, "VECTOR_Y", Blockly.JavaScript.ORDER_ATOMIC);
+    var vectorZ = Blockly.JavaScript.valueToCode(block, "VECTOR_Z", Blockly.JavaScript.ORDER_ATOMIC);
+    return `console.log("Animal: ${animal}, Vector: [" + ${vectorX} + ", " + ${vectorY} + ", " + ${vectorZ} + "]");\n`;
 };
